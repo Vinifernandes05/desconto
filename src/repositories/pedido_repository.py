@@ -1,13 +1,14 @@
 from src.models.pedido import Pedido
-from src.database.connection import Databaseconnection
-class PedidoRepository:
-    """Classe de repositório para armazenar e gerenciar pedidos"""
+from src.database.connection import DatabaseConnection
 
-    def __init__(self):
-        self.pedidos = []
-    
+class PedidoRepository:
+    """Classe de repositório para armazenar e gerenciar pedidos."""
+
+    def __init__(self, database: DatabaseConnection):
+        self.database = database
+
     def adicionar_pedido(self, pedido: Pedido):
-        self.pedidos.append(pedido)
+        self.database.pedidos.append(pedido)
 
     def listar_pedidos(self):
-        return self.pedidos
+        return self.database.pedidos
