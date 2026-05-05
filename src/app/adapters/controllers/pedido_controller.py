@@ -1,15 +1,11 @@
-from src.models.pedido import Pedido
-from src.services.pedido_service import PedidoService
-
+from src.app.use_cases.criar_pedido import CriarPedido
 
 class PedidoController:
-    """Classe de controlador para gerenciar a lógica de negócios dos pedidos."""
+    def __init__(self, criar_pedido_use_case: CriarPedido):
+        self.criar_pedido_use_case = criar_pedido_use_case
 
-    def __init__(self, service: PedidoService):
-        self.service = service
+    def criar_pedido(self, cliente: str, valor_original: float, tipo_desconto: str):
+        return self.criar_pedido_use_case.executar(cliente, valor_original, tipo_desconto)
 
-    def adicionar_pedido(self, pedido: Pedido):
-        self.service.adicionar_pedido(pedido)
-
-    def processar_pedidos(self):
-        self.service.processar_pedidos()
+    def listar_pedidos(self):
+        return self.criar_pedido_use_case.listar_pedidos()
