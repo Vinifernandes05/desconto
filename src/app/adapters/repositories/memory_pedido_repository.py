@@ -1,14 +1,13 @@
-from src.models.pedido import Pedido
-from src.database.connection import DatabaseConnection
+from src.app.entities.pedido import Pedido
+from src.app.gateways.pedido_gateway import IPedidoGateway
+from src.app.frameworks.database.memory_database import MemoryDatabase
 
-class PedidoRepository:
-    """Classe de repositório para armazenar e gerenciar pedidos."""
-
-    def __init__(self, database: DatabaseConnection):
+class MemoryPedidoRepository(IPedidoGateway):
+    def __init__(self, database: MemoryDatabase):
         self.database = database
 
-    def adicionar_pedido(self, pedido: Pedido):
-        self.database.pedidos.append(pedido)
+    def salvar(self, pedido: Pedido, tipo_desconto: str) -> None:
+        self.database.pedidos.append({"pedido": pedido, "tipo_desconto": tipo_desconto})
 
-    def listar_pedidos(self):
+    def listar(self) -> list[Pedido]:
         return self.database.pedidos
