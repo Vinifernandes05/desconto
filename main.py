@@ -1,0 +1,35 @@
+from desconto_app.src.app.frameworks.database.memory_database import MemoryDatabase
+from desconto_app.src.app.adapters.repositories.memory_pedido_repository import MemoryPedidoRepository
+from desconto_app.src.app.use_cases.criar_pedido import CriarPedido
+from desconto_app.src.app.adapters.controllers.pedido_controller import PedidoController
+from desconto_app.src.app.presenters.pedido_presenter import PedidoPresenter
+
+# Função principal que é responsável por criar pedidos e exibir os resultados
+def main() -> None:
+    database = MemoryDatabase()
+    
+    pedido_gateway = MemoryPedidoRepository(database)
+    
+    criar_pedido_use_case = CriarPedido(pedido_gateway)
+    
+    presenter = PedidoPresenter()
+    
+    controller = PedidoController(
+        criar_pedido_use_case=criar_pedido_use_case,
+        presenter=presenter
+    )
+    
+    pedido1 = controller.criar_pedido("Cliente A", 100, "normal")
+    pedido2 = controller.criar_pedido("Cliente B", 200, "premium")
+    pedido3 = controller.criar_pedido("Cliente C", 300, "vip")
+
+    print("Pedidos criados:")
+    print(pedido1)
+    print(pedido2)
+    print(pedido3)
+    
+    print("\nPedidos salvos:")
+    for pedido in controller.listar_pedidos():
+        print(pedido)
+
+if __name__ == "__main__":   main()
