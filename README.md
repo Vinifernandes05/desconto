@@ -44,11 +44,10 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 
 ## ⚙️ Funcionalidades
 
-✔️ Criação de pedidos com cálculo automático de desconto
-✔️ Três tipos de desconto: Normal (10%), VIP (20%), Premium (30%)
-✔️ Listagem de todos os pedidos registrados
-✔️ Validação do tipo de desconto (lança erro para tipos inválidos)
-✔️ Persistência em memória (MemoryDatabase)
+✔️ Criação de pedidos com cálculo automático de desconto  
+✔️ Três tipos de desconto: Normal (10%), VIP (20%), Premium (30%)  
+✔️ Listagem de todos os pedidos registrados  
+✔️ Validação do tipo de desconto (lança erro para tipos inválidos)  
 ✔️ Exibição formatada dos resultados via Presenter
 
 ---
